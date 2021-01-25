@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Diary_MVC_2._0.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Linq;
 
 namespace Diary_MVC_2._0.Models
 {
@@ -12,10 +14,7 @@ namespace Diary_MVC_2._0.Models
                 serviceProvider.GetRequiredService<
                     DbContextOptions<DiaryDbContext>>()))
             {
-                
-                // false - this will create new data for DB
-                // true - There is data in DB
-                if (true)
+                if(context.Plan.Any())
                     return;
 
                 context.Plan.AddRange(

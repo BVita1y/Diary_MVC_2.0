@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Diary_MVC_2._0.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace Diary_MVC_2._0.Models
+namespace Diary_MVC_2._0.Data
 {
     public class DiaryDbContext : DbContext
     {

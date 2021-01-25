@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Diary_MVC_2._0.Models;
+using Diary_MVC_2._0.Data;
 
 namespace Diary_MVC_2._0.Controllers
 {
@@ -111,7 +112,7 @@ namespace Diary_MVC_2._0.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index), nameof(Plan));
             }
             return View(reminder);
         }

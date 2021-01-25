@@ -16,6 +16,7 @@ namespace Diary_MVC_2._0.Migrations
                     Type = table.Column<int>(type: "int", nullable: false),
                     Subject = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     StartDateTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsPerformed = table.Column<bool>(type: "bit", nullable: false),
                     Discriminator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     FinishDateTime = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Place = table.Column<string>(type: "nvarchar(max)", nullable: true)

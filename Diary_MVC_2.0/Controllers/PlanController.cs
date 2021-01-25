@@ -1,4 +1,5 @@
-﻿using Diary_MVC_2._0.Models;
+﻿using Diary_MVC_2._0.Data;
+using Diary_MVC_2._0.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
