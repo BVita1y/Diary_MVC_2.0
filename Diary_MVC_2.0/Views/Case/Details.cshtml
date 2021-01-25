@@ -1,0 +1,49 @@
+﻿@model Diary_MVC_2._0.Models.Case
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Case</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsPerformed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IsPerformed)
+
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.FinishDateTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FinishDateTime)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Type)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Type)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Subject)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Subject)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.StartDateTime)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.StartDateTime)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-controller="@Model.Type" asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-controller="Plan" asp-action="Index">Back to List</a>
+</div>

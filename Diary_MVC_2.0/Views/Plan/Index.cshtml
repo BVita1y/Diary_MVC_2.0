@@ -1,0 +1,77 @@
+﻿@*@model IEnumerable<Diary_MVC_2._0.Models.Plan>*@
+@model Diary_MVC_2._0.Models.PlansViewModel
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Plans</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+<form asp-controller="Plan" asp-action="Index" method="get">  
+    <p>
+        <select asp-for="Limit" asp-items="Html.GetEnumSelectList<PlansViewModel.DAYSLIMIT>()"></select>
+
+        <select asp-for="PlanType" asp-items="Model.Types">
+            <option>All</option>
+        </select>
+
+        <input type="date" name="date" />
+
+        <input type="text" name="SearchString" placeholder="Search for events" />
+
+        <button type="submit">Search</button>
+    </p>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th> @Html.DisplayNameFor(model => model.Plans[0].IsPerformed) </th>
+            <th> @Html.DisplayNameFor(model => model.Plans[0].Type) </th>
+            <th> @Html.DisplayNameFor(model => model.Plans[0].Subject) </th>
+            <th> @Html.DisplayNameFor(model => model.Plans[0].StartDateTime) </th>
+            <th> @Html.DisplayNameFor(model => ((Case)model.Plans[0]).FinishDateTime) </th>
+            <th> @Html.DisplayNameFor(model => ((Meeting)model.Plans[0]).Place) </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Plans)
+        {
+            <tr>
+                <td>@Html.CheckBox("Enable", item.IsPerformed ? 1 : 0)</td>
+                <td>@Html.DisplayFor(modelItem => item.Type)</td>
+                <td>@Html.DisplayFor(modelItem => item.Subject)</td>
+                <td>@Html.DisplayFor(modelItem => item.StartDateTime)</td>
+                @if (item is Meeting || item is Case)
+                {
+                    <td>@Html.DisplayFor(modelItem => ((Case)item).FinishDateTime)</td>
+                }
+                else
+                {
+                    <td>-----</td>
+                }
+
+                @if (item is Meeting)
+                {
+                    <td>@Html.DisplayFor(modelItem => ((Meeting)item).Place)</td>
+                }
+                else
+                {
+                    <td>-----</td>
+                }
+
+                <td>
+                    <a asp-controller="@item.Type" asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-controller="@item.Type" asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-controller="@item.Type" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
