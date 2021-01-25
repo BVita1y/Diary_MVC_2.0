@@ -16,8 +16,8 @@
 
 Используется EntityFramework, есть автоматическое заполнение БД данными. Для этого в файле [Models/SeedData] предусмотрен условный оператор if
 
-// false - this will create new data for DB
-
-// true - There is data in DB
-
-   if (true) return;
+```C#
+   // false - this will create new data for DB
+   // true - There is data in DB
+      if (true) return;
+```
