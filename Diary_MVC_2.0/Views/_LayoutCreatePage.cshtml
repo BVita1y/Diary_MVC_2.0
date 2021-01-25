@@ -17,16 +17,21 @@
     </header>
     <div class="container">
         <main role="main" class="pb-3">
-            <h1>Create new plan</h1>
+            <h1>Create new @ViewData["Type"]</h1> 
             <hr />
 
-            <a asp-controller="Reminder" asp-action="Create">Reminder</a> | 
-            <a asp-controller="Case" asp-action="Create">Case</a> | 
-            <a asp-controller="Meeting" asp-action="Create">Meeting</a>
-            
+            <div style="margin-bottom: 30px">
+                <a asp-controller="Reminder" asp-action="Create">Reminder</a> |
+                <a asp-controller="Case" asp-action="Create">Case</a> |
+                <a asp-controller="Meeting" asp-action="Create">Meeting</a>
+            </div>
             @RenderBody()
         </main>
+        <div>
+            <a asp-action="Index">Back to List</a>
+        </div>
     </div>
+
 
     <footer class="border-top footer text-muted">
         <div class="container">

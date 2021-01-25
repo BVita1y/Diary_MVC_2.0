@@ -22,27 +22,36 @@ namespace Diary_MVC_2._0.Controllers
         // GET: Plan
         public async Task<IActionResult> Index(Plan.PlanType? planType, DateTime? date, string searchString, DAYSLIMIT? limit)
         {
+            // Collecting a list of the task's Types, that page conteins
             IQueryable<string> typeQuery = from p in _context.Plan
                                            orderby p.Type
                                            select p.Type.ToString();
 
+            // preparing a request 
             var plans = from p in _context.Plan
                         select p;
 
+            // Choosing lines that contain "Key phrase"
             if (!string.IsNullOrEmpty(searchString))
                 plans = plans.Where(p => p.Subject.Contains(searchString) || p is Meeting && ((Meeting)p).Place.Contains(searchString));
 
+            // Choosing plans of a sertain type
             if (planType != null)
                 plans = plans.Where(x => x.Type == planType);
 
+            // Choosing plans for a certain date
             if (date != null)
                 plans = plans.Where(x => (x.StartDateTime.Date).Equals(date));
 
+            // Choosing plans for the period
             if (limit != DAYSLIMIT.list)
             {
-                if (limit == DAYSLIMIT.day) plans = plans.Where(x => (x.StartDateTime.Date) < DateTime.Now.Date.AddDays(1));
-                else if (limit == DAYSLIMIT.week) plans = plans.Where(x => (x.StartDateTime.Date) < DateTime.Now.Date.AddDays(7));
-                else if (limit == DAYSLIMIT.month) plans = plans.Where(x => (x.StartDateTime.Date) < DateTime.Now.Date.AddMonths(1));
+                if (limit == DAYSLIMIT.day) 
+                    plans = plans.Where(x => x.StartDateTime.Date < DateTime.Now.Date.AddDays(1) && x.StartDateTime.Date >= DateTime.Now.Date);
+                else if (limit == DAYSLIMIT.week) 
+                    plans = plans.Where(x => (x.StartDateTime.Date) < DateTime.Now.Date.AddDays(7) && x.StartDateTime.Date >= DateTime.Now.Date);
+                else if (limit == DAYSLIMIT.month) 
+                    plans = plans.Where(x => (x.StartDateTime.Date) < DateTime.Now.Date.AddMonths(1) && x.StartDateTime.Date >= DateTime.Now.Date);
             }
 
             var plansVM = new PlansViewModel
@@ -55,6 +64,8 @@ namespace Diary_MVC_2._0.Controllers
 
             //return View(await _context.Plan.ToListAsync());
         }
+
+        #region not Used yet
 
         // GET: Plan/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -180,5 +191,6 @@ namespace Diary_MVC_2._0.Controllers
         {
             return _context.Plan.Any(e => e.Id == id);
         }
+        #endregion
     }
 }
