@@ -56,9 +56,9 @@ namespace Diary_MVC_2._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Place,FinishDateTime,Id,Type,Subject,StartDateTime,IsPerformed")] Meeting meeting)
         {
+            meeting.Type = Plan.PlanType.Meeting;
             if (ModelState.IsValid)
             {
-                meeting.Type = Plan.PlanType.Meeting;
                 _context.Add(meeting);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), nameof(Plan));
