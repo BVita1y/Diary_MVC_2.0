@@ -66,8 +66,8 @@ namespace Diary_MVC_2._0.Controllers
             return View(meeting);
         }
 
-        // GET: Meeting/Change/5
-        public async Task<IActionResult> Change(int? id)
+        // GET: Meeting/ChangeStatusPerform/5
+        public async Task<IActionResult> ChangeStatusPerform(int? id)
         {
             if (id == null)
             {

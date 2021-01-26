@@ -66,6 +66,47 @@ namespace Diary_MVC_2._0.Controllers
             return View(reminder);
         }
 
+
+        // GET: Reminder/ChangeStatusPerform/5
+        public async Task<IActionResult> ChangeStatusPerform(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var reminder = await _context.Reminder.FindAsync(id);
+            if (reminder == null)
+            {
+                return NotFound();
+            }
+
+            reminder.IsPerformed = !reminder.IsPerformed;
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(reminder);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!ReminderExists(reminder.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index), nameof(Plan));
+            }
+            return View(reminder);
+        }
+
+
         // GET: Reminder/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

@@ -45,10 +45,8 @@
         {
             <tr>
                 <td>
-                    <p>
-                        <a asp-controller="@item.Type" asp-action="Change" asp-route-id="@item.Id">@Html.CheckBox("Enable", item.IsPerformed)</a>
-                        <a asp-controller="@item.Type" asp-action="Change" asp-route-id="@item.Id">finish</a>
-                    </p>
+                    @Html.CheckBox("Enable", item.IsPerformed)
+                    <a asp-controller="@item.Type" asp-action="ChangeStatusPerform" asp-route-id="@item.Id">performed</a>
                 </td>
                 <td>@Html.DisplayFor(modelItem => item.Type)</td>
                 <td>@Html.DisplayFor(modelItem => item.Subject)</td>

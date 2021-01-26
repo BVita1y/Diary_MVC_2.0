@@ -66,6 +66,49 @@ namespace Diary_MVC_2._0.Controllers
             return View(@case);
         }
 
+
+        // GET: Case/ChangeStatusPerform/5
+        public async Task<IActionResult> ChangeStatusPerform(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var @case = await _context.Case.FindAsync(id);
+            if (@case == null)
+            {
+                return NotFound();
+            }
+
+            @case.IsPerformed = !@case.IsPerformed;
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(@case);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CaseExists(@case.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index), nameof(Plan));
+            }
+            return View(@case);
+        }
+
+
+
+
         // GET: Case/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
