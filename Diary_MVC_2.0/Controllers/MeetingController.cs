@@ -66,6 +66,45 @@ namespace Diary_MVC_2._0.Controllers
             return View(meeting);
         }
 
+        // GET: Meeting/Change/5
+        public async Task<IActionResult> Change(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var meeting = await _context.Meeting.FindAsync(id);
+            if (meeting == null)
+            {
+                return NotFound();
+            }
+
+            meeting.IsPerformed = !meeting.IsPerformed;
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(meeting);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!MeetingExists(meeting.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                return RedirectToAction(nameof(Index), nameof(Plan));
+            }
+            return View(meeting);
+        }
+
         // GET: Meeting/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

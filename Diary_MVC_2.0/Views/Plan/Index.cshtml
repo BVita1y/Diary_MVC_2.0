@@ -12,7 +12,7 @@
     <a asp-controller="Reminder" asp-action="Create">Create New</a>
 </p>
 
-<form asp-controller="Plan" asp-action="Index" method="get">  
+<form asp-controller="Plan" asp-action="Index" method="get">
     <p>
         <select asp-for="Limit" asp-items="Html.GetEnumSelectList<PlansViewModel.DAYSLIMIT>()"></select>
 
@@ -44,7 +44,12 @@
         @foreach (var item in Model.Plans)
         {
             <tr>
-                <td>@Html.CheckBox("Enable", item.IsPerformed ? 1 : 0)</td>
+                <td>
+                    <p>
+                        <a asp-controller="@item.Type" asp-action="Change" asp-route-id="@item.Id">@Html.CheckBox("Enable", item.IsPerformed)</a>
+                        <a asp-controller="@item.Type" asp-action="Change" asp-route-id="@item.Id">finish</a>
+                    </p>
+                </td>
                 <td>@Html.DisplayFor(modelItem => item.Type)</td>
                 <td>@Html.DisplayFor(modelItem => item.Subject)</td>
                 <td>@Html.DisplayFor(modelItem => item.StartDateTime)</td>
