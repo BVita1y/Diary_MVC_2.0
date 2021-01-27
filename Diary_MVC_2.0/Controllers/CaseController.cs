@@ -56,9 +56,9 @@ namespace Diary_MVC_2._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FinishDateTime,Id,Type,Subject,StartDateTime,IsPerformed")] Case @case)
         {
+            @case.Type = Plan.PlanType.Case;
             if (ModelState.IsValid)
             {
-                @case.Type = Plan.PlanType.Case;
                 _context.Add(@case);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), nameof(Plan));
