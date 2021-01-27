@@ -56,9 +56,9 @@ namespace Diary_MVC_2._0.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Type,Subject,StartDateTime,IsPerformed")] Reminder reminder)
         {
-            reminder.Type = Plan.PlanType.Reminder;
             if (ModelState.IsValid)
             {
+                reminder.Type = Plan.PlanType.Reminder;
                 _context.Add(reminder);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index), nameof(Plan));
