@@ -57,8 +57,11 @@ namespace Diary_MVC_2._0.Controllers
 
             var plansVM = new PlansViewModel
             {
+                Limit = limit ?? DAYSLIMIT.list,
                 Types = new SelectList(await typeQuery.Distinct().ToListAsync()),
-                Plans = await plans.ToListAsync()
+                Plans = await plans.ToListAsync(),
+                SelectedDate = date,
+                KeyPhrase = searchString
             };
 
             return View(plansVM);
