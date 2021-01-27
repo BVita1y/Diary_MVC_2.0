@@ -1,13 +1,11 @@
 ﻿@*@model IEnumerable<Diary_MVC_2._0.Models.Plan>*@
 @model Diary_MVC_2._0.Models.PlansViewModel
 
-
 @{
     ViewData["Title"] = "Index";
 }
 
 <h1 style="display:inline-block;">Plans</h1> <span style="font-size: 25px;">for the</span>
-
 <form asp-controller="Plan" asp-action="Index" method="get" id="LimitFilterForm" style="display:inline-block;">
     <p>
         <select asp-for="Limit" asp-items="Html.GetEnumSelectList<PlansViewModel.DAYSLIMIT>()" 
@@ -17,6 +15,7 @@
         <input type="hidden" asp-for="KeyPhrase">
     </p>
 </form>
+
 
 <p>
     <a asp-controller="Reminder" asp-action="Create">Create New</a>
@@ -32,6 +31,7 @@
         <input asp-for="SelectedDate" type="date" name="date" />
         <input asp-for="KeyPhrase" type="text" name="SearchString" placeholder="Search for events" />
         <button type="submit">Search</button>
+        <a asp-action="Index">Back to Full List</a>
     </p>
 </form>
 
