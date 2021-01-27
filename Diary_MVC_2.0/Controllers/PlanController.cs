@@ -20,14 +20,13 @@ namespace Diary_MVC_2._0.Controllers
             _context = context;
         }
 
-        // GET: Plan
+        // GET: Plan // Method that is responsible for displaying the main page and filters work
         public async Task<IActionResult> Index(Plan.PlanType? planType, DateTime? date, string searchString, DAYSLIMIT? limit)
         {
             // Collecting a list of the task's Types, that page conteins
             IQueryable<string> typeQuery = from p in _context.Plan
                                            orderby p.Type
                                            select p.Type.ToString();
-
             // preparing a request 
             var plans = from p in _context.Plan
                         select p;
@@ -65,11 +64,12 @@ namespace Diary_MVC_2._0.Controllers
             };
 
             return View(plansVM);
-
-            //return View(await _context.Plan.ToListAsync());
         }
 
-        #region not Used yet
+        #region WithoutChanges
+
+        // POST: Plan / Index // the method is not needed because Index does 
+                                //not change the state of the application, it just filters the data.
 
         // GET: Plan/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -96,8 +96,6 @@ namespace Diary_MVC_2._0.Controllers
         }
 
         // POST: Plan/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Type,Subject,StartDateTime,IsPerformed")] Plan plan)
@@ -128,8 +126,6 @@ namespace Diary_MVC_2._0.Controllers
         }
 
         // POST: Plan/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Type,Subject,StartDateTime,IsPerformed")] Plan plan)

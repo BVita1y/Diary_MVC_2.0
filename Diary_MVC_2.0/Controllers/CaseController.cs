@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Diary_MVC_2._0.Data;
+using Diary_MVC_2._0.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Diary_MVC_2._0.Models;
-using Diary_MVC_2._0.Data;
 
 namespace Diary_MVC_2._0.Controllers
 {
@@ -18,6 +15,8 @@ namespace Diary_MVC_2._0.Controllers
         {
             _context = context;
         }
+
+        // Get 
 
         // GET: Case
         public async Task<IActionResult> Index()
@@ -50,8 +49,6 @@ namespace Diary_MVC_2._0.Controllers
         }
 
         // POST: Case/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("FinishDateTime,Id,Type,Subject,StartDateTime,IsPerformed")] Case @case)
@@ -65,7 +62,6 @@ namespace Diary_MVC_2._0.Controllers
             }
             return View(@case);
         }
-
 
         // GET: Case/ChangeStatusPerform/5
         public async Task<IActionResult> ChangeStatusPerform(int? id)
@@ -81,8 +77,10 @@ namespace Diary_MVC_2._0.Controllers
                 return NotFound();
             }
 
+            // change task status (performed / not performed)
             @case.IsPerformed = !@case.IsPerformed;
 
+            // making changes to DB
             if (ModelState.IsValid)
             {
                 try
@@ -106,9 +104,6 @@ namespace Diary_MVC_2._0.Controllers
             return View(@case);
         }
 
-
-
-
         // GET: Case/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -126,8 +121,6 @@ namespace Diary_MVC_2._0.Controllers
         }
 
         // POST: Case/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("FinishDateTime,Id,Type,Subject,StartDateTime,IsPerformed")] Case @case)

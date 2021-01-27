@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Diary_MVC_2._0.Data;
+using Diary_MVC_2._0.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Diary_MVC_2._0.Models;
-using Diary_MVC_2._0.Data;
 
 namespace Diary_MVC_2._0.Controllers
 {
@@ -50,8 +47,6 @@ namespace Diary_MVC_2._0.Controllers
         }
 
         // POST: Reminder/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Type,Subject,StartDateTime,IsPerformed")] Reminder reminder)
@@ -65,7 +60,6 @@ namespace Diary_MVC_2._0.Controllers
             }
             return View(reminder);
         }
-
 
         // GET: Reminder/ChangeStatusPerform/5
         public async Task<IActionResult> ChangeStatusPerform(int? id)
@@ -106,7 +100,6 @@ namespace Diary_MVC_2._0.Controllers
             return View(reminder);
         }
 
-
         // GET: Reminder/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -124,8 +117,6 @@ namespace Diary_MVC_2._0.Controllers
         }
 
         // POST: Reminder/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Type,Subject,StartDateTime,IsPerformed")] Reminder reminder)
