@@ -66,11 +66,6 @@ namespace Diary_MVC_2._0.Controllers
             return View(plansVM);
         }
 
-        #region WithoutChanges
-
-        // POST: Plan / Index // the method is not needed because Index does 
-                                //not change the state of the application, it just filters the data.
-
         // GET: Plan/Details/5
         public async Task<IActionResult> Details(int? id)
         {
@@ -191,6 +186,5 @@ namespace Diary_MVC_2._0.Controllers
         {
             return _context.Plan.Any(e => e.Id == id);
         }
-        #endregion
     }
 }
