@@ -56,7 +56,7 @@ namespace Diary_MVC_2._0.Controllers
             {
                 _context.Add(meeting);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index), nameof(Plan));
+                return RedirectToRoute(new { controller = "Plan", action = "Index" });
             }
             return View(meeting);
         }
@@ -95,7 +95,7 @@ namespace Diary_MVC_2._0.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index), nameof(Plan));
+                return RedirectToRoute(new { controller = "Plan", action = "Index" });
             }
             return View(meeting);
         }
@@ -144,7 +144,7 @@ namespace Diary_MVC_2._0.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index), nameof(Plan));
+                return RedirectToRoute(new { controller = "Plan", action = "Index" });
             }
             return View(meeting);
         }
