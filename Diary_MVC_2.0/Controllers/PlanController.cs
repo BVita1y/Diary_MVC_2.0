@@ -46,12 +46,14 @@ namespace Diary_MVC_2._0.Controllers
             // Choosing plans for the period
             if (limit != DAYSLIMIT.list)
             {
+                var currentTime = DateTime.Today;
+
                 if (limit == DAYSLIMIT.day) 
-                    plans = plans.Where(x => x.StartDateTime.Date < DateTime.Now.Date.AddDays(1) && x.StartDateTime.Date >= DateTime.Now.Date);
+                    plans = plans.Where(x => x.StartDateTime.Date < currentTime.AddDays(1) && x.StartDateTime.Date >= currentTime);
                 else if (limit == DAYSLIMIT.week) 
-                    plans = plans.Where(x => (x.StartDateTime.Date) < DateTime.Now.Date.AddDays(7) && x.StartDateTime.Date >= DateTime.Now.Date);
+                    plans = plans.Where(x => (x.StartDateTime.Date) < currentTime.AddDays(7) && x.StartDateTime.Date >= currentTime);
                 else if (limit == DAYSLIMIT.month) 
-                    plans = plans.Where(x => (x.StartDateTime.Date) < DateTime.Now.Date.AddMonths(1) && x.StartDateTime.Date >= DateTime.Now.Date);
+                    plans = plans.Where(x => (x.StartDateTime.Date) < currentTime.AddMonths(1) && x.StartDateTime.Date >= currentTime);
             }
 
             var plansVM = new PlansViewModel
