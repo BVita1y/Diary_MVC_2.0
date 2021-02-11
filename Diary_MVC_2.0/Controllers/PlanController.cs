@@ -21,7 +21,7 @@ namespace Diary_MVC_2._0.Controllers
         }
 
         // GET: Plan // Method that is responsible for displaying the main page and filters work
-        public async Task<IActionResult> Index(Plan.PlanType? planType, DateTime? date, string searchString, DAYSLIMIT? limit)
+        public async Task<IActionResult> Index(Plan.PlanType? planType, DateTime? date, string searchString, DAYSLIMIT limit = DAYSLIMIT.list)
         {
             // Collecting a list of the task's Types, that page conteins
             IQueryable<string> typeQuery = from p in _context.Plan
@@ -56,7 +56,7 @@ namespace Diary_MVC_2._0.Controllers
 
             var plansVM = new PlansViewModel
             {
-                Limit = limit ?? DAYSLIMIT.list,
+                Limit = limit,
                 Types = new SelectList(await typeQuery.Distinct().ToListAsync()),
                 Plans = await plans.ToListAsync(),
                 SelectedDate = date,
