@@ -52,8 +52,11 @@
         {
             <tr>
                 <td>
-                    @Html.CheckBox("Enable", item.IsPerformed)
-                    <a asp-controller="@item.Type" asp-action="ChangeStatusPerform" asp-route-id="@item.Id">performed</a>
+                    <form id="@item.Id" asp-controller="@item.Type" asp-action="ChangeStatusPerform" asp-route-id="@item.Id">
+                        <input type="checkbox" checked=@item.IsPerformed onclick="$('#@item.Id').submit();" />
+                    </form>
+                    @*@Html.CheckBox("Enable", item.IsPerformed)*@
+                    @*<a asp-controller="@item.Type" asp-action="ChangeStatusPerform" asp-route-id="@item.Id">performed</a>*@
                 </td>
                 <td>@Html.DisplayFor(modelItem => item.Type)</td>
                 <td>@Html.DisplayFor(modelItem => item.Subject)</td>
@@ -85,3 +88,10 @@
         }
     </tbody>
 </table>
+
+<script>
+
+    function func() {
+        RedirectToRoute(new { controller = item.Type, action = "ChangeStatusPerform" });
+    }
+</script>
